@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BLL.ViewModels.BookAddEditVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .book-container {
+        width: 200px;
+        height: 300px;
+        margin: 10px;
+        float: left;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .book-details {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .book-image {
+        max-width: 100%;
+        max-height: 150px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<p>
+    <a asp-action="FirstPage" asp-controller="Book">Go BACK</a>
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="book-container">
+        @if (!string.IsNullOrEmpty(item.Upload))
+        {
+            <img class="book-image" src="~/images/books/@Html.DisplayFor(modelItem => item.Upload)" alt="Book Image">
+        }
+        <div class="book-details">
+            <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+            <p>@Html.DisplayFor(modelItem => item.AuthorName)</p>
+            <p>Price: @Html.DisplayFor(modelItem => item.Price)</p>
+            <p>Quantity: @Html.DisplayFor(modelItem => item.Quantity)</p>
+            <p>Is Issued: @Html.DisplayFor(modelItem => item.IsIssued)</p>
+        </div>
+    </div>
+}
